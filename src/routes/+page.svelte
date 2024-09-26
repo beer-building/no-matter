@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { Button } from "@/lib/shared/components/button";
+  import { Input } from "@/lib/shared/components/input";
+  import { Client4 } from "@mattermost/client";
   import { invoke } from "@tauri-apps/api/core";
 
   let name = "";
@@ -8,9 +11,28 @@
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
     greetMsg = await invoke("greet", { name });
   }
+
+  let value = "";
+  const client = new Client4();
+
+  const login = () => {
+    client.setUrl(value);
+    client.login("username", "password").then((user) => {
+      // ...
+    });
+  };
 </script>
 
 <div class="container">
+  <div
+    class="form"
+    style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;"
+  >
+    <Input type="text" bind:value />
+
+    <Button on:click={() => login()}>Get data</Button>
+  </div>
+
   <h1>Welcome to Tauri!</h1>
 
   <div class="row">
