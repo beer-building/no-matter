@@ -17,6 +17,9 @@ dependencies:
   '@tauri-apps/plugin-shell':
     specifier: '>=2.0.0-rc.0'
     version: 2.0.0-rc.1
+  effector:
+    specifier: ^23.2.2
+    version: 23.2.2
 
 devDependencies:
   '@mattermost/types':
@@ -1329,6 +1332,11 @@ packages:
   /devalue@5.1.1:
     resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
     dev: true
+
+  /effector@23.2.2:
+    resolution: {integrity: sha512-gzwATi9pgZQx0TNhM2LESmoUpEO+vhibLZPCvVzi7spMvKFwKnfJV2PFj4xqNFFSC35TXaznx30ne62dCQ6ZRQ==}
+    engines: {node: '>=11.0.0'}
+    dev: false
 
   /electron-to-chromium@1.5.29:
     resolution: {integrity: sha512-PF8n2AlIhCKXQ+gTpiJi0VhcHDb69kYX4MtCiivctc2QD3XuNZ/XIOlbGzt7WAjjEev0TtaH6Cu3arZExm5DOw==}
