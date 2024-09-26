@@ -12,12 +12,19 @@
     greetMsg = await invoke("greet", { name });
   }
 
-  let value = "";
+  let serverUrl = "";
+  let username = "";
+  let password = "";
+  let user = null;
+
   const client = new Client4();
 
-  const login = () => {
-    client.setUrl(value);
-    client.login("username", "password").then((user) => {
+  const login = async () => {
+    client.setUrl(serverUrl);
+    await new Promise((r) => setTimeout(r, 100));
+
+    client.login(username, password).then((userData) => {
+      user = userData;
       // ...
     });
   };
@@ -28,7 +35,27 @@
     class="form"
     style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;"
   >
-    <Input type="text" bind:value />
+    <Input
+      type="text"
+      value={serverUrl}
+      on:change={({ detail }) => (serverUrl = detail)}
+      placeholder="Server"
+    />
+    <Input
+      type="text"
+      value={username}
+      on:change={({ detail }) => (username = detail)}
+      placeholder="Username"
+    />
+    <Input
+      type="text"
+      value={password}
+      on:change={({ detail }) => (password = detail)}
+      placeholder="Password"
+    />
+
+    USER:
+    {JSON.stringify(user, null, 2)}
 
     <Button on:click={() => login()}>Get data</Button>
   </div>

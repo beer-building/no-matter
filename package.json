@@ -15,6 +15,7 @@
   "dependencies": {
     "@mattermost/client": "^10.0.0",
     "@tauri-apps/api": ">=2.0.0-rc.0",
+    "@tauri-apps/plugin-http": "2.0.0-rc.2",
     "@tauri-apps/plugin-shell": ">=2.0.0-rc.0"
   },
   "devDependencies": {
