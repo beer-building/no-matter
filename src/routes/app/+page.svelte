@@ -6,10 +6,4 @@
   const user = authModel.$user;
 </script>
 
-APP
-
-{#if $user}
-  <UserProfile user={$user} />
-{/if}
-
 <Button on:click={() => authModel.logout()}>logout</Button>

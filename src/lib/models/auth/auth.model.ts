@@ -24,6 +24,8 @@ export const login = createEvent<{ username: string; password: string }>();
 export const logout = createEvent();
 export const setServerUrl = createEvent<string>();
 
+getCurrentUserDataFx.fail.watch(console.log);
+
 sample({
   clock: $serverUrl,
   target: updateClientUrlFx,
