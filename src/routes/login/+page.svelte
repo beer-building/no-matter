@@ -8,7 +8,13 @@
 
   const serverUrl = authModel.$serverUrl;
 
-  const onLogin = () => {};
+  const onLogin = () => {
+    if (!username || !password) {
+      return;
+    }
+
+    authModel.login({ username, password });
+  };
 </script>
 
 <div class="page">

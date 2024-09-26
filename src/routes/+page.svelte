@@ -1,66 +1,12 @@
 <script lang="ts">
   import { Button } from "@/lib/shared/components/button";
-  import { Input } from "@/lib/shared/components/input";
-  import { Client4 } from "@mattermost/client";
-  import { invoke } from "@tauri-apps/api/core";
-
-  let name = "";
-  let greetMsg = "";
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    greetMsg = await invoke("greet", { name });
-  }
-
-  let serverUrl = "";
-  let username = "";
-  let password = "";
-  let user = null;
-
-  const client = new Client4();
-
-  const login = async () => {
-    client.setUrl(serverUrl);
-    await new Promise((r) => setTimeout(r, 100));
-
-    client.login(username, password).then((userData) => {
-      user = userData;
-      // ...
-    });
-  };
 </script>
 
 <div class="container">
-  <div
-    class="form"
-    style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;"
-  >
-    <Input
-      type="text"
-      value={serverUrl}
-      on:change={({ detail }) => (serverUrl = detail)}
-      placeholder="Server"
-    />
-    <Input
-      type="text"
-      value={username}
-      on:change={({ detail }) => (username = detail)}
-      placeholder="Username"
-    />
-    <Input
-      type="text"
-      value={password}
-      on:change={({ detail }) => (password = detail)}
-      placeholder="Password"
-    />
-
-    USER:
-    {JSON.stringify(user, null, 2)}
-
-    <Button on:click={() => login()}>Get data</Button>
-  </div>
-
   <h1>Welcome to Tauri!</h1>
+
+  <a href="/app">GOTO APP</a>
+  <a href="/app">GOTO LOGIN</a>
 
   <div class="row">
     <a href="https://vitejs.dev" target="_blank">
@@ -75,13 +21,6 @@
   </div>
 
   <p>Click on the Tauri, Vite, and SvelteKit logos to learn more.</p>
-
-  <form class="row" on:submit|preventDefault={greet}>
-    <input id="greet-input" placeholder="Enter a name..." bind:value={name} />
-    <button type="submit">Greet</button>
-  </form>
-
-  <p>{greetMsg}</p>
 </div>
 
 <style>

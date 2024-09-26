@@ -2,8 +2,6 @@
 // so we will use adapter-static to prerender the app (SSG)
 // See: https://v2.tauri.app/start/frontend/sveltekit/ for more info
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
-export const prerender = true;
-export const ssr = false;
 import { browser } from "$app/environment";
 import "../colors.css";
 import "../common.css";
@@ -18,3 +16,6 @@ if (browser) {
     return tauriFetch(...props);
   };
 }
+
+export const prerender = false;
+export const ssr = false;
