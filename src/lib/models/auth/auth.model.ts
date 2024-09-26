@@ -93,8 +93,6 @@ sample({
   target: _getUserData,
 });
 
-getCurrentUserDataFx.fail.watch(console.log);
-
 sample({
   clock: [$pending, $isAuthorized],
   source: {
