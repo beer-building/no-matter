@@ -8,16 +8,13 @@ import { browser } from "$app/environment";
 import "../colors.css";
 import "../common.css";
 
+// patch fetch to use the Tauri fetch without cors
 if (browser) {
   const ogFetch = window.fetch;
   window.fetch = (...props) => {
-    console.log(...props);
-    if (props[0]?.startsWith("ipc")) {
+    if ((props[0] as any)?.startsWith("ipc")) {
       return ogFetch(...props);
     }
     return tauriFetch(...props);
   };
 }
-
-// patch fetch to use the Tauri fetch without cors
-// globalThis.fetch = fetch;
