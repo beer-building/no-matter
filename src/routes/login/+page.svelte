@@ -1,46 +1,70 @@
 <script lang="ts">
-  import { authModel } from "@/lib/models/auth";
+  import { authModel, loginFormModel } from "@/lib/models/auth";
   import Button from "@/lib/shared/components/button/Button.svelte";
   import { Input } from "@/lib/shared/components/input";
 
   let username = "";
   let password = "";
 
-  const serverUrl = authModel.$serverUrl;
+  const serverUrl = loginFormModel.$serverUrl;
+  const formErrors = loginFormModel.$formErrors;
+  const pending = authModel.$pending;
+
+  $: isDisabled = Boolean(
+    !username ||
+      !password ||
+      $formErrors?.credentials ||
+      $formErrors?.url ||
+      $pending
+  );
 
   const onLogin = () => {
-    if (!username || !password) {
+    if (isDisabled) {
       return;
     }
 
-    authModel.login({ username, password });
+    loginFormModel.login({ username, password });
   };
 </script>
 
-<div class="page">
-  <form on:submit|preventDefault={() => onLogin()}>
-    <Input
-      type="text"
-      value={$serverUrl}
-      on:change={({ detail }) => authModel.setServerUrl(detail)}
-      placeholder="Server"
-    />
-    <Input
-      type="text"
-      value={username}
-      on:change={({ detail }) => (username = detail)}
-      placeholder="Username"
-    />
-    <Input
-      type="text"
-      value={password}
-      on:change={({ detail }) => (password = detail)}
-      placeholder="Password"
-    />
+{#if !$pending}
+  <div class="page">
+    <form on:submit|preventDefault={() => onLogin()}>
+      <Input
+        type="text"
+        value={$serverUrl}
+        on:change={({ detail }) => {
+          loginFormModel.formInputChanged("url");
+          authModel.setServerUrl(detail);
+        }}
+        placeholder="Server"
+        errorMessage={$formErrors?.url}
+      />
+      <Input
+        type="text"
+        value={username}
+        on:change={({ detail }) => {
+          loginFormModel.formInputChanged("credentials");
+          return (username = detail);
+        }}
+        placeholder="Username"
+        errorMessage={$formErrors?.credentials}
+      />
+      <Input
+        type="password"
+        value={password}
+        on:change={({ detail }) => {
+          loginFormModel.formInputChanged("credentials");
+          return (password = detail);
+        }}
+        placeholder="Password"
+        errorMessage={$formErrors?.credentials}
+      />
 
-    <Button type="submit">Login</Button>
-  </form>
-</div>
+      <Button type="submit" disabled={isDisabled}>Login</Button>
+    </form>
+  </div>
+{/if}
 
 <style lang="postcss">
   .page {
