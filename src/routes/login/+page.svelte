@@ -27,44 +27,42 @@
   };
 </script>
 
-{#if !$pending}
-  <div class="page">
-    <form on:submit|preventDefault={() => onLogin()}>
-      <Input
-        type="text"
-        value={$serverUrl}
-        on:change={({ detail }) => {
-          loginFormModel.formInputChanged("url");
-          authModel.setServerUrl(detail);
-        }}
-        placeholder="Server"
-        errorMessage={$formErrors?.url}
-      />
-      <Input
-        type="text"
-        value={username}
-        on:change={({ detail }) => {
-          loginFormModel.formInputChanged("credentials");
-          return (username = detail);
-        }}
-        placeholder="Username"
-        errorMessage={$formErrors?.credentials}
-      />
-      <Input
-        type="password"
-        value={password}
-        on:change={({ detail }) => {
-          loginFormModel.formInputChanged("credentials");
-          return (password = detail);
-        }}
-        placeholder="Password"
-        errorMessage={$formErrors?.credentials}
-      />
+<div class="page">
+  <form on:submit|preventDefault={() => onLogin()}>
+    <Input
+      type="text"
+      value={$serverUrl}
+      on:change={({ detail }) => {
+        loginFormModel.formInputChanged("url");
+        authModel.setServerUrl(detail);
+      }}
+      placeholder="Server"
+      errorMessage={$formErrors?.url}
+    />
+    <Input
+      type="text"
+      value={username}
+      on:change={({ detail }) => {
+        loginFormModel.formInputChanged("credentials");
+        return (username = detail);
+      }}
+      placeholder="Username"
+      errorMessage={$formErrors?.credentials}
+    />
+    <Input
+      type="password"
+      value={password}
+      on:change={({ detail }) => {
+        loginFormModel.formInputChanged("credentials");
+        return (password = detail);
+      }}
+      placeholder="Password"
+      errorMessage={$formErrors?.credentials}
+    />
 
-      <Button type="submit" disabled={isDisabled}>Login</Button>
-    </form>
-  </div>
-{/if}
+    <Button type="submit" disabled={isDisabled}>Login</Button>
+  </form>
+</div>
 
 <style lang="postcss">
   .page {
