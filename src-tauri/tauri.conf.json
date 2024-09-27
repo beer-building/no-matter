@@ -10,15 +10,24 @@
     "frontendDist": "../build"
   },
   "app": {
+    "macOSPrivateApi": true,
     "windows": [
       {
-        "title": "no-matter",
+        "title": "",
+        "label": "main",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "titleBarStyle": "Overlay",
+        "transparent": true,
+        "windowEffects": {
+          "state": "followsWindowActiveState",
+          "effects": ["hudWindow"]
+        }
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "devCsp": null
     }
   },
   "bundle": {

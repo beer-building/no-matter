@@ -1,34 +1,41 @@
 <script lang="ts">
   import { providerModel } from "@/lib/models/provider";
   import { Avatar } from "@/lib/shared/components/avatar";
+  import { loadAuthImage } from "@/lib/shared/helpers/load-auth-image";
   import type { UserProfile } from "@mattermost/types/users";
-  import { fetch } from "@tauri-apps/plugin-http";
+  import { onDestroy } from "svelte";
 
   export let user: UserProfile;
 
   let image: string = "";
+  let unsuscribe: () => void;
 
-  $: loadPic(
+  $: loadImage(
     providerModel.client.getProfilePictureUrl(
       user.id,
       user.last_picture_update,
     ),
   );
 
-  const loadPic = async (url: string) => {
-    const res = await fetch(url);
-    const blob = await res.blob();
-
-    image = URL.createObjectURL(blob);
+  const loadImage = async (src: string) => {
+    unsuscribe = await loadAuthImage(src, (newImage) => {
+      image = newImage;
+    });
   };
+
+  onDestroy(() => {
+    unsuscribe();
+  });
 </script>
 
-<button>
+<button on:click>
   <Avatar src={image} />
 
-  {user.first_name}
-  {" "}
-  {user.last_name}
+  <span>
+    {user.first_name}
+    {" "}
+    {user.last_name}
+  </span>
 </button>
 
 <style>
@@ -40,5 +47,20 @@
     display: flex;
     align-items: center;
     gap: var(--padding-s);
+    width: 100%;
+    text-align: left;
+    padding: var(--padding-s);
+    border-radius: var(--radius);
+
+    &:hover {
+      background: var(--color-hover);
+    }
+  }
+  span {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 </style>

@@ -1,7 +1,4 @@
-<script lang="ts">
-  import { Button } from "@/lib/shared/components/button";
-</script>
-
+<div data-tauri-drag-region style="height: 36px; width: 100%;"></div>
 <div class="container">
   <h1>Welcome to Tauri!</h1>
 

@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { invoke } from "@tauri-apps/api";
+  import { invoke } from "@tauri-apps/api/core";
+  import { onMount } from "svelte";
 
+  export let id = "default";
   export let initialWith = 200;
   export let maxWidth = 350;
   export let minWidth = 150;
@@ -14,10 +16,26 @@
     document.body.style.cursor = "";
     document.removeEventListener("mouseup", onMouseUp);
     document.removeEventListener("mousemove", onMouseMove);
+
+    localStorage.setItem(id, width.toString());
   };
   const onMouseMove = (event: MouseEvent) => {
     width = event.pageX;
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (width < minWidth) {
+      document.body.style.cursor = "e-resize";
+    } else if (width > maxWidth) {
+      document.body.style.cursor = "w-resize";
+    } else {
+      document.body.style.cursor = "col-resize";
+    }
   };
+
+  onMount(() => {
+    width = Number(localStorage.getItem(id)) || initialWith;
+  });
 
   const onMouseDown = (event: MouseEvent) => {
     isDragging = true;
@@ -30,15 +48,19 @@
   $: isSmallMode = width < smallSize + 20;
 
   $: {
-    invoke("trigger_haptic_feedback");
-    console.log(isSmallMode);
+    invoke("haptic_feedback");
+    [isSmallMode];
   }
 </script>
 
 <div class="wrapper" style:width="{isSmallMode ? smallSize : safeWidth}px">
   <slot />
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="drag" class:active={isDragging} on:mousedown={onMouseDown}></div>
+  <div
+    class="drag"
+    class:active={isDragging}
+    on:mousedown|stopPropagation|preventDefault={onMouseDown}
+  ></div>
 </div>
 
 <style lang="postcss">
@@ -50,17 +72,15 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    background-color: color-mix(
-      in srgb,
-      var(--seed-color) 24%,
-      var(--background-color)
-    );
+    background-color: oklch(from var(--color-accent) l c h / 0.1);
+    backdrop-filter: blur(10px);
     right: 0;
     width: 6px;
     opacity: 0;
     cursor: col-resize;
     transition: var(--transition);
     transform: translateX(50%);
+
     &:hover,
     &.active {
       opacity: 1;
@@ -75,7 +95,7 @@
       left: 50%;
       width: 3px;
       border-radius: 10em;
-      background: color-mix(in srgb, transparent, var(--color-text));
+      background: oklch(from var(--color-title) l c h / 50%);
     }
   }
 </style>

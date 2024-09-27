@@ -1,8 +1,8 @@
 <script lang="ts">
   export let type: "button" | "submit" = "button";
-  export let style: "filled" | "outline" = "filled";
+  export let style: "filled" | "outline" | "icon" = "filled";
   export let size: "small" | "default" | "large" = "default";
-  export let disabled: boolean = false;
+  export let disabled = false;
 </script>
 
 <button {type} class="style__{style} size__{size}" on:click {disabled}>
@@ -17,6 +17,7 @@
     justify-content: center;
     align-items: center;
     transition: transform var(--transition);
+    border: none;
 
     &:not(:disabled) {
       cursor: pointer;
@@ -24,13 +25,24 @@
     &:not(:disabled):active {
       transform: scale(0.98);
     }
-
     &:disabled {
       background-color: var(--color-separator);
       color: var(--color-text);
       cursor: not-allowed;
       opacity: 0.6;
       box-shadow: none;
+    }
+  }
+
+  .style__icon {
+    height: 36px;
+    width: 36px;
+    border-radius: var(--radius);
+    & :global(svg path) {
+      fill: var(--color-text);
+    }
+    &:hover {
+      background: var(--color-hover);
     }
   }
 

@@ -5,8 +5,13 @@ import { get } from "svelte/store";
 import { goto } from "$app/navigation";
 
 export const loginFx = createEffect(
-  ({ username, password }: { username: string; password: string }) => {
-    return providerModel.client.login(username, password);
+  async ({ username, password }: { username: string; password: string }) => {
+    const user = await providerModel.client.login(username, password);
+
+    return {
+      user,
+      token: providerModel.client.token,
+    };
   },
 );
 
@@ -27,8 +32,6 @@ export const checkAuthAndRedirectFx = createEffect(
     if (pending) {
       return;
     }
-
-    console.log(isAuthorized, pending);
 
     const currentRoute = get(page);
 
