@@ -20,4 +20,7 @@
   .sidebar {
     height: 100%;
   }
+  .content {
+    background-color: var(--color-surface);
+  }
 </style>

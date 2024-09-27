@@ -9,6 +9,7 @@ import {
 } from "./auth.api";
 import type { UserProfile } from "@mattermost/types/users";
 
+export const $token = createPersistedStore("token", "");
 export const $serverUrl = createPersistedStore("serverUrl", "");
 export const $isAuthorized = createStore(false);
 export const $pending = createStore(true);
@@ -16,6 +17,11 @@ export const $user = createStore<UserProfile | null>(null);
 
 const updateClientUrlFx = createEffect((url: string) => {
   providerModel.client.setUrl(url);
+});
+
+const setTokenFx = createEffect((token: string) => {
+  providerModel.client.setToken(token);
+  providerModel.client.setHeader("Token", token);
 });
 
 const _getUserData = createEvent();
@@ -43,7 +49,14 @@ sample({
 
 sample({
   clock: loginFx.doneData,
+  fn: ({ user }) => user,
   target: $user,
+});
+
+sample({
+  clock: loginFx.doneData,
+  fn: ({ token }) => token,
+  target: $token,
 });
 
 sample({
@@ -88,6 +101,12 @@ sample({
   clock: _onInit,
   source: $serverUrl,
   target: updateClientUrlFx,
+});
+
+sample({
+  clock: _onInit,
+  source: $token,
+  target: setTokenFx,
 });
 
 sample({

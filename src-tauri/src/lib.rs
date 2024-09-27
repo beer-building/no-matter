@@ -7,7 +7,6 @@ use tauri_plugin_decorum::WebviewWindowExt;
 
 mod window_decorations;
 use window_decorations::WindowExt;
-//
 
 #[tauri::command]
 fn haptic_feedback() {
@@ -34,9 +33,6 @@ pub fn run() {
             {
                 window.set_traffic_lights_inset(12.0, 16.0).unwrap();
                 window.fix_decoration();
-
-                // window.make_transparent().unwrap();
-                // window.set_window_level(25).unwrap();
             }
 
             Ok(())

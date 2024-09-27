@@ -23,6 +23,14 @@
     width = event.pageX;
     event.stopPropagation();
     event.preventDefault();
+
+    if (width < minWidth) {
+      document.body.style.cursor = "e-resize";
+    } else if (width > maxWidth) {
+      document.body.style.cursor = "w-resize";
+    } else {
+      document.body.style.cursor = "col-resize";
+    }
   };
 
   onMount(() => {
@@ -41,7 +49,7 @@
 
   $: {
     invoke("haptic_feedback");
-    console.log(isSmallMode);
+    [isSmallMode];
   }
 </script>
 
@@ -65,6 +73,7 @@
     top: 0;
     bottom: 0;
     background-color: oklch(from var(--color-accent) l c h / 0.1);
+    backdrop-filter: blur(10px);
     right: 0;
     width: 6px;
     opacity: 0;

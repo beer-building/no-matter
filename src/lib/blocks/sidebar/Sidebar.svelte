@@ -12,6 +12,7 @@
 <Resizable id="sidebar">
   <div class="wrapper">
     <div class="top">
+      <div data-tauri-drag-region style="height: 36px; width: 100%;"></div>
       {#if $user}
         <UserProfile user={$user} />
       {/if}
@@ -26,10 +27,15 @@
 
 <style>
   .wrapper {
-    background-color: var(--color-panel);
+    background-color: oklch(from var(--color-panel) l c h / 10%);
     height: 100%;
+    width: 100%;
     display: grid;
     grid-template-rows: 1fr auto;
+  }
+
+  .top {
+    min-width: 0;
   }
 
   .bottom {

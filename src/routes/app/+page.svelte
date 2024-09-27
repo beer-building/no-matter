@@ -1,9 +1,5 @@
 <script lang>
-  import { UserProfile } from "@/lib/blocks/user-profile";
-  import { authModel } from "@/lib/models/auth";
-  import { Button } from "@/lib/shared/components/button";
+  import { goto } from "$app/navigation";
 
-  const user = authModel.$user;
+  goto("/app/settings", { replaceState: true });
 </script>
-
-<Button on:click={() => authModel.logout()}>logout</Button>

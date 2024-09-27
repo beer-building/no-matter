@@ -29,6 +29,4 @@ objc2-app-kit = { version = "0.2.2", features = [
   "NSToolbar",
   "NSResponder",
 ] }
-objc2-foundation = { version = "0.2.2", features = ["NSThread"] }
-objc2 = "0.5.2"
 tauri-plugin-decorum = "1.1.1"
