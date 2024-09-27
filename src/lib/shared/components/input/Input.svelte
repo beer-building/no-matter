@@ -34,9 +34,9 @@
     />
 
     {#if type === "password"}
-      <span class="toggle-password" on:click={togglePasswordVisibility}>
+      <button on:click={togglePasswordVisibility} class="icon-button">
         <Icon name={showPassword ? "eye-off" : "eye"} size={18} />
-      </span>
+      </button>
     {/if}
   </div>
 
@@ -53,38 +53,45 @@
   }
 
   .input-container {
+    display: flex;
+    align-items: center;
     position: relative;
     width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-separator);
+    transition: border-color 0.3s ease;
+
+    &:focus-within {
+      border-color: var(--color-accent);
+    }
   }
 
   input {
     appearance: none;
-    border-radius: var(--radius);
-    border: 1px solid var(--color-separator);
+    border: none;
     background: var(--color-panel);
     color: var(--color-title);
     outline: none;
     height: 32px;
     padding: 0 var(--padding-m);
-    padding-right: 40px;
     width: 100%;
-    transition: border-color 0.3s ease;
-
-    &:focus-visible {
-      border-color: var(--color-accent);
-    }
-
-    &.error {
-      border-color: var(--color-red);
-    }
+    transition: background-color 0.3s ease;
+    border-radius: var(--radius) 0 0 var(--radius);
   }
 
-  .toggle-password {
-    position: absolute;
-    right: var(--padding-m);
-    top: 50%;
-    transform: translateY(-50%);
+  .icon-button {
+    color: var(--color-title);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-panel);
+    border: none;
+    height: 100%;
+    padding: var(--padding-m);
     cursor: pointer;
+    margin: 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    transition: background-color 0.3s ease;
   }
 
   .error-message {
