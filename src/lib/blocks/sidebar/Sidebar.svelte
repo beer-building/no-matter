@@ -34,11 +34,9 @@
     grid-template-rows: 1fr auto;
   }
 
-  .top {
+  .top,
+  bottom {
     min-width: 0;
-  }
-
-  .bottom {
     padding: var(--padding-s);
   }
 </style>
