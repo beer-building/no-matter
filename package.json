@@ -17,7 +17,8 @@
     "@tauri-apps/api": ">=2.0.0-rc.0",
     "@tauri-apps/plugin-http": "2.0.0-rc.2",
     "@tauri-apps/plugin-shell": ">=2.0.0-rc.0",
-    "effector": "^23.2.2"
+    "effector": "^23.2.2",
+    "patronum": "^2.2.0"
   },
   "devDependencies": {
     "@mattermost/types": "^10.0.0",
