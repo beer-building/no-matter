@@ -34,7 +34,11 @@
     />
 
     {#if type === "password"}
-      <button on:click={togglePasswordVisibility} class="icon-button">
+      <button
+        on:click={togglePasswordVisibility}
+        class="icon-button"
+        type="button"
+      >
         <Icon name={showPassword ? "eye-off" : "eye"} size={18} />
       </button>
     {/if}

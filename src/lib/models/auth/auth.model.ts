@@ -12,7 +12,6 @@ import { pending, reset } from "patronum";
 import { $serverUrl, beforeSubmitValidated } from "./login-form.model";
 
 export const $token = createPersistedStore("token", "");
-export const $serverUrl = createPersistedStore("serverUrl", "");
 export const $isAuthorized = createStore(false);
 export const $pending = pending([loginFx, getCurrentUserDataFx]);
 export const $user = createStore<UserProfile | null>(null);
