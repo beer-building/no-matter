@@ -31,8 +31,6 @@ const _onInit = createEvent();
 export const logout = createEvent();
 export const setServerUrl = createEvent<string>();
 
-getCurrentUserDataFx.fail.watch(console.log);
-
 sample({
   clock: $serverUrl,
   target: updateClientUrlFx,

@@ -12,7 +12,7 @@
 <Resizable id="sidebar">
   <div class="wrapper">
     <div class="top">
-      <div data-tauri-drag-region style="height: 36px; width: 100%;"></div>
+      <div data-tauri-drag-region class="draggable" />
       {#if $user}
         <UserProfile user={$user} />
       {/if}
@@ -26,6 +26,10 @@
 </Resizable>
 
 <style>
+  .draggable {
+    height: 36px;
+    width: 100%;
+  }
   .wrapper {
     background-color: oklch(from var(--color-panel) l c h / 10%);
     height: 100%;
@@ -35,7 +39,7 @@
   }
 
   .top,
-  bottom {
+  .bottom {
     min-width: 0;
     padding: var(--padding-s);
   }

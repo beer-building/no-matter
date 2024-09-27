@@ -33,8 +33,6 @@ export const checkAuthAndRedirectFx = createEffect(
       return;
     }
 
-    console.log(isAuthorized, pending);
-
     const currentRoute = get(page);
 
     if (isAuthorized && currentRoute.url.pathname === "/login") {
