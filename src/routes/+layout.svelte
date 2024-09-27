@@ -21,5 +21,6 @@
     align-items: center;
     backdrop-filter: blur(10px);
     background: oklch(from var(--color-surface) l c h / 80%);
+    z-index: var(--z-index-2);
   }
 </style>

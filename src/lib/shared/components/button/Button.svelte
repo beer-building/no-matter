@@ -4,7 +4,7 @@
   export let size: "small" | "default" | "large" = "default";
 </script>
 
-<button {type} class="style__{style} size__{size}" on:click>
+<button {type} class="style__{style} size__{size}" on:click {disabled}>
   <slot />
 </button>
 
@@ -26,23 +26,19 @@
     }
   }
 
-  .style__icon {
-    height: 36px;
-    width: 36px;
-    border-radius: var(--radius);
-
-    & :global(svg path) {
-      fill: var(--color-text);
-    }
-
-    &:hover {
-      background: var(--color-hover);
+    &:disabled {
+      background-color: var(--color-separator);
+      color: var(--color-text);
+      cursor: not-allowed;
+      opacity: 0.6;
+      box-shadow: none;
     }
   }
 
   .style__filled {
     background: var(--color-accent);
     border-radius: var(--radius);
+    border: none;
     color: var(--color-surface);
     box-shadow:
       rgba(62, 62, 62, 0.1) 0px -2.4px 0px 0px inset,

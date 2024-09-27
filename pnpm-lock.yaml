@@ -20,6 +20,9 @@ dependencies:
   effector:
     specifier: ^23.2.2
     version: 23.2.2
+  patronum:
+    specifier: ^2.2.0
+    version: 2.2.0(effector@23.2.2)
 
 devDependencies:
   '@mattermost/types':
@@ -1603,6 +1606,14 @@ packages:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /patronum@2.2.0(effector@23.2.2):
+    resolution: {integrity: sha512-Idsb5swd+2UI1NuBlHJuVA4WlaUeEluZJxGAZ9obCViuEf4pP68bij3f1sZCM/vqqWPsbHclYweDNt/sWu0O1g==}
+    peerDependencies:
+      effector: ^23
+    dependencies:
+      effector: 23.2.2
+    dev: false
 
   /periscopic@3.1.0:
     resolution: {integrity: sha512-vKiQ8RRtkl9P+r/+oefh25C3fhybptkHKCZSPlcXiJux2tJF55GnEj3BVn4A5gKfq9NWWXXrxkHBwVPUfH0opw==}

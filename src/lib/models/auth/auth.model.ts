@@ -8,11 +8,13 @@ import {
   logoutFx,
 } from "./auth.api";
 import type { UserProfile } from "@mattermost/types/users";
+import { pending, reset } from "patronum";
+import { $serverUrl, beforeSubmitValidated } from "./login-form.model";
 
 export const $token = createPersistedStore("token", "");
 export const $serverUrl = createPersistedStore("serverUrl", "");
 export const $isAuthorized = createStore(false);
-export const $pending = createStore(true);
+export const $pending = pending([loginFx, getCurrentUserDataFx]);
 export const $user = createStore<UserProfile | null>(null);
 
 const updateClientUrlFx = createEffect((url: string) => {
@@ -26,7 +28,7 @@ const setTokenFx = createEffect((token: string) => {
 
 const _getUserData = createEvent();
 const _onInit = createEvent();
-export const login = createEvent<{ username: string; password: string }>();
+
 export const logout = createEvent();
 export const setServerUrl = createEvent<string>();
 
@@ -43,7 +45,7 @@ sample({
 });
 
 sample({
-  clock: login,
+  clock: beforeSubmitValidated,
   target: loginFx,
 });
 
@@ -62,17 +64,6 @@ sample({
 sample({
   clock: logout,
   target: logoutFx,
-});
-
-sample({
-  clock: [
-    loginFx.done,
-    loginFx.fail,
-    getCurrentUserDataFx.done,
-    getCurrentUserDataFx.fail,
-  ],
-  fn: () => false,
-  target: $pending,
 });
 
 sample({
@@ -125,5 +116,7 @@ sample({
 
 _onInit();
 
-$isAuthorized.reset(logout);
-$user.reset(logout);
+reset({
+  clock: logoutFx,
+  target: [$isAuthorized, $user],
+});
