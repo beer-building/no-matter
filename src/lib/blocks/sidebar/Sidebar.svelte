@@ -4,17 +4,19 @@
   import { Button } from "@/lib/shared/components/button";
   import { Icon } from "@/lib/shared/components/icon";
   import { goto } from "$app/navigation";
-  import { channelsModel, authModel } from "@/lib/models";
+  import { channelsModel, authModel, teamModel } from "@/lib/models";
   import { Category } from "@/lib/shared/components/category";
   import { ChannelLink } from "../channel-link";
 
   const user = authModel.$user;
   const categories = channelsModel.$categories;
   const channels = channelsModel.$channels;
+  const teams = teamModel.$teams;
 
   $: console.log("MAPPED CHANNLES", $channels);
   $: console.log("USER", $user);
   $: console.log("CATEGORIES", $categories);
+  $: console.log("TEAMS", $teams);
 </script>
 
 <Resizable id="sidebar">
