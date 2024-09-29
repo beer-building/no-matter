@@ -11,7 +11,6 @@
   const user = authModel.$user;
   const categories = channelsModel.$categories;
   const channels = channelsModel.$channels;
-  const teams = teamModel.$teams;
 </script>
 
 <Resizable id="sidebar">
