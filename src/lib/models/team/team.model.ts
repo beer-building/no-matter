@@ -19,6 +19,6 @@ sample({
 sample({
   clock: loadTeamsFx.doneData,
   filter: (teams) => teams.length === 1,
-  fn: (teams) => teams[0],
+  fn: (teams) => teams[teams.length - 1],
   target: $currentTeam,
 });
