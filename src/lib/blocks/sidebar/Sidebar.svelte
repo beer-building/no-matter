@@ -12,11 +12,6 @@
   const categories = channelsModel.$categories;
   const channels = channelsModel.$channels;
   const teams = teamModel.$teams;
-
-  $: console.log("MAPPED CHANNLES", $channels);
-  $: console.log("USER", $user);
-  $: console.log("CATEGORIES", $categories);
-  $: console.log("TEAMS", $teams);
 </script>
 
 <Resizable id="sidebar">
@@ -33,7 +28,7 @@
         {#each $categories as category}
           <Category label={category.display_name}>
             <ul>
-              {#each $channels.filter( (e) => category.channel_ids.includes(e.id), ) as channel}
+              {#each $channels.filter( (e) => category.channel_ids.includes(e.id) ) as channel}
                 <li>
                   <ChannelLink {channel} />
                 </li>
