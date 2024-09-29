@@ -11,6 +11,10 @@
   const user = authModel.$user;
   const categories = channelsModel.$categories;
   const channels = channelsModel.$channels;
+
+  $: console.log("MAPPED CHANNLES", $channels);
+  $: console.log("USER", $user);
+  $: console.log("CATEGORIES", $categories);
 </script>
 
 <Resizable id="sidebar">

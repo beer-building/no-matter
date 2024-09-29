@@ -11,8 +11,6 @@ const loadUsersFx = createEffect(() =>
   providerModel.client.getProfiles(0, 200),
 );
 
-authModel.onAuth.watch(() => console.log("authModel.onAuth"));
-
 sample({
   clock: authModel.onAuth,
   target: loadUsersFx,
