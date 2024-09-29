@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "check:lint": "pnpm biome lint src",
+    "check:format": "pnpm biome format src",
+    "write:biom:": "pnpm biome check --write src"
   },
   "license": "MIT",
   "dependencies": {
@@ -21,6 +24,7 @@
     "patronum": "^2.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.2",
     "@mattermost/types": "^10.0.0",
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.0.0",
