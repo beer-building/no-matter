@@ -7,9 +7,9 @@
 
   export let user: UserProfile;
 
-  let image: string = "";
   let unsuscribe: () => void;
 
+  let image: string = "";
   $: loadImage(
     providerModel.client.getProfilePictureUrl(
       user.id,

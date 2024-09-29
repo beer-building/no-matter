@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { authModel } from "@/lib/models/auth";
+  import { authModel } from "@/lib/models";
 
   const pending = authModel.$pending;
 </script>
