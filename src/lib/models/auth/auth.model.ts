@@ -30,6 +30,7 @@ const _onInit = createEvent();
 
 export const logout = createEvent();
 export const setServerUrl = createEvent<string>();
+export const onAuth = createEvent();
 
 sample({
   clock: $serverUrl,
@@ -111,7 +112,19 @@ sample({
   target: checkAuthAndRedirectFx,
 });
 
-_onInit();
+sample({
+  clock: [$pending, $isAuthorized],
+  source: {
+    pending: $pending,
+    isAuthorized: $isAuthorized,
+  },
+  filter: ({ pending, isAuthorized }) => !pending && isAuthorized,
+  target: onAuth,
+});
+
+setTimeout(() => {
+  _onInit();
+});
 
 reset({
   clock: logoutFx,
