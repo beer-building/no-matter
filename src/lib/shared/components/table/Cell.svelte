@@ -6,11 +6,11 @@ export let width = "auto";
 </script>
 
 <td class:pale {colspan} style:text-align={align} style:width on:click on:dblclick>
-	<slot />
+  <slot />
 </td>
 
 <style>
 .pale {
-	color: oklch(from var(--color-text) l c h / 40%);
+  color: oklch(from var(--color-text) l c h / 40%);
 }
 </style>

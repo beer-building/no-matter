@@ -6,29 +6,29 @@ export let animated = false;
 </script>
 
 <tr
-	on:click
-	class:interactive
-	on:blur
-	on:focusout
-	on:focusin
-	on:contextmenu
-	out:slide|local={{ duration: animated ? 300 : 0 }}
+  on:click
+  class:interactive
+  on:blur
+  on:focusout
+  on:focusin
+  on:contextmenu
+  out:slide|local={{ duration: animated ? 300 : 0 }}
 >
-	<slot />
+  <slot />
 </tr>
 
 <style lang="postcss">
 tr {
-	display: flex;
+  display: flex;
 }
 .interactive {
-	cursor: pointer;
+  cursor: pointer;
 
-	&:hover {
-		background: var(--color-hover);
-	}
+  &:hover {
+    background: var(--color-hover);
+  }
 }
 :global(tbody) tr + tr {
-	border-top: 1px solid var(--color-separator);
+  border-top: 1px solid var(--color-separator);
 }
 </style>

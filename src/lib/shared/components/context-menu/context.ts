@@ -1,3 +1,3 @@
 export type MenuContext = {
-	close: () => void;
+  close: () => void;
 };

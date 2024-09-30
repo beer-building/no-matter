@@ -8,13 +8,13 @@ import Row from "./Row.svelte";
 import TableComponent from "./Table.svelte";
 
 type _Table = typeof TableComponent & {
-	Cell: typeof Cell;
-	Header: typeof Header;
-	Head: typeof Head;
-	Row: typeof Row;
-	Body: typeof Body;
-	InputCell: typeof InputCell;
-	EditableCell: typeof EditableCell;
+  Cell: typeof Cell;
+  Header: typeof Header;
+  Head: typeof Head;
+  Row: typeof Row;
+  Body: typeof Body;
+  InputCell: typeof InputCell;
+  EditableCell: typeof EditableCell;
 };
 
 const Table: _Table = TableComponent as _Table;

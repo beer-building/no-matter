@@ -10,13 +10,13 @@ import { browser } from "$app/environment";
 
 // patch fetch to use the Tauri fetch without cors
 if (browser) {
-	const ogFetch = window.fetch;
-	window.fetch = (...props) => {
-		if ((props[0] as any)?.startsWith("ipc")) {
-			return ogFetch(...props);
-		}
-		return tauriFetch(...props);
-	};
+  const ogFetch = window.fetch;
+  window.fetch = (...props) => {
+    if ((props[0] as any)?.startsWith("ipc")) {
+      return ogFetch(...props);
+    }
+    return tauriFetch(...props);
+  };
 }
 
 export const prerender = false;

@@ -1,36 +1,36 @@
 import { createStore, type EventCallable } from "effector";
 
 const tryOr = <T>(fn: () => T, fallback: T): T => {
-	try {
-		return fn();
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	} catch (_) {
-		return fallback;
-	}
+  try {
+    return fn();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
+    return fallback;
+  }
 };
 
 type Options = Partial<{
-	initEvent: EventCallable<void>;
+  initEvent: EventCallable<void>;
 }>;
 
 export const createPersistedStore = <T>(key: string, defaultState: T, options?: Options) => {
-	if (typeof localStorage === "undefined") {
-		return createStore(defaultState);
-	}
+  if (typeof localStorage === "undefined") {
+    return createStore(defaultState);
+  }
 
-	const $store = createStore(
-		tryOr(() => JSON.parse(localStorage.getItem(key) || ""), defaultState)
-	);
+  const $store = createStore(
+    tryOr(() => JSON.parse(localStorage.getItem(key) || ""), defaultState)
+  );
 
-	$store.watch((state) => {
-		localStorage.setItem(key, JSON.stringify(state));
-	});
+  $store.watch((state) => {
+    localStorage.setItem(key, JSON.stringify(state));
+  });
 
-	if (options?.initEvent) {
-		setTimeout(() => {
-			options!.initEvent!();
-		});
-	}
+  if (options?.initEvent) {
+    setTimeout(() => {
+      options!.initEvent!();
+    });
+  }
 
-	return $store;
+  return $store;
 };

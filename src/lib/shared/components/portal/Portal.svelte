@@ -4,25 +4,25 @@ let ref: HTMLDivElement;
 let portal: HTMLDivElement;
 
 onMount(() => {
-	portal = document.createElement("div");
-	portal.className = "portal";
-	document.body.appendChild(portal);
-	portal.appendChild(ref);
+  portal = document.createElement("div");
+  portal.className = "portal";
+  document.body.appendChild(portal);
+  portal.appendChild(ref);
 });
 
 onDestroy(() => {
-	document.body.removeChild(portal);
+  document.body.removeChild(portal);
 });
 </script>
 
 <div class="portal-clone">
-	<div bind:this={ref}>
-		<slot></slot>
-	</div>
+  <div bind:this={ref}>
+    <slot></slot>
+  </div>
 </div>
 
 <style>
 .portal-clone {
-	display: none;
+  display: none;
 }
 </style>

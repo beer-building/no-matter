@@ -14,32 +14,32 @@ let image: string = "";
 $: loadImage(providerModel.client.getProfilePictureUrl(user?.id, user?.last_picture_update));
 
 const loadImage = async (src: string) => {
-	loadAuthImage(src, (newImage) => {
-		image = newImage;
-	});
+  loadAuthImage(src, (newImage) => {
+    image = newImage;
+  });
 };
 </script>
 
 <div class="wrapper">
-	<Avatar src={image} size={20} />
+  <Avatar src={image} size={20} />
 
-	<div class="name">
-		{getFullName(user) || user?.username}
-	</div>
+  <div class="name">
+    {getFullName(user) || user?.username}
+  </div>
 </div>
 
 <style>
 .wrapper {
-	display: flex;
-	align-items: center;
-	gap: var(--padding-s);
+  display: flex;
+  align-items: center;
+  gap: var(--padding-s);
 }
 
 .name {
-	flex: 1;
-	min-width: 0;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 </style>

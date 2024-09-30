@@ -18,46 +18,46 @@ let inputValue = value;
 const dispatch = createEventDispatcher();
 
 $: {
-	inputValue = value;
+  inputValue = value;
 }
 
 const onDone = () => {
-	isEditing = false;
-	dispatch("change", inputValue);
+  isEditing = false;
+  dispatch("change", inputValue);
 };
 </script>
 
 {#if !isEditing}
-	<Cell {align} {pale} {colspan} on:dblclick={() => (isEditing = true)} {width}>
-		{presentValue ?? value}
-	</Cell>
+  <Cell {align} {pale} {colspan} on:dblclick={() => (isEditing = true)} {width}>
+    {presentValue ?? value}
+  </Cell>
 {:else}
-	<InputCell
-		{align}
-		{width}
-		{selectAll}
-		autofocus
-		value={inputValue}
-		on:blur={onDone}
-		on:keydown={({ key, shiftKey }) => {
-			switch (key) {
-				case "Enter":
-					onDone();
-					break;
-				case "Escape":
-					isEditing = false;
-					break;
-				case "Tab":
-					setTimeout(() => {
-						if (shiftKey) {
-							dispatch("focusprev");
-						} else {
-							dispatch("focusnext");
-						}
-					});
-					break;
-			}
-		}}
-		on:change={({ detail }) => (inputValue = detail)}
-	/>
+  <InputCell
+    {align}
+    {width}
+    {selectAll}
+    autofocus
+    value={inputValue}
+    on:blur={onDone}
+    on:keydown={({ key, shiftKey }) => {
+      switch (key) {
+        case "Enter":
+          onDone();
+          break;
+        case "Escape":
+          isEditing = false;
+          break;
+        case "Tab":
+          setTimeout(() => {
+            if (shiftKey) {
+              dispatch("focusprev");
+            } else {
+              dispatch("focusnext");
+            }
+          });
+          break;
+      }
+    }}
+    on:change={({ detail }) => (inputValue = detail)}
+  />
 {/if}

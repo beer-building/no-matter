@@ -11,11 +11,11 @@ export const $users = createStore<Array<UserProfile>>([]);
 const loadUsersFx = createEffect(() => providerModel.client.getProfiles(0, 200));
 
 sample({
-	clock: authModel.onAuth,
-	target: loadUsersFx
+  clock: authModel.onAuth,
+  target: loadUsersFx
 });
 
 sample({
-	clock: loadUsersFx.doneData,
-	target: $users
+  clock: loadUsersFx.doneData,
+  target: $users
 });

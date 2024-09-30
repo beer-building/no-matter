@@ -1,24 +1,24 @@
 :root {
-	--color-accent: oklch(0.77 0.16 349.67);
-	--color-surface: oklch(0.2 0 0);
-	--color-panel: oklch(0.25 0 0);
-	--color-separator: oklch(1 0 0 / 0.09);
-	--color-hover: oklch(1 0 0 / 0.1);
-	--color-text: oklch(0.86 0 0);
-	--color-title: oklch(0.94 0 0);
+  --color-accent: oklch(0.77 0.16 349.67);
+  --color-surface: oklch(0.2 0 0);
+  --color-panel: oklch(0.25 0 0);
+  --color-separator: oklch(1 0 0 / 0.09);
+  --color-hover: oklch(1 0 0 / 0.1);
+  --color-text: oklch(0.86 0 0);
+  --color-title: oklch(0.94 0 0);
 
-	--color-red: oklch(0.65 0.24 24.14);
-	--color-green: oklch(0.78 0.17 162.95);
-	--color-blue: oklch(0.77 0.14 226.24);
+  --color-red: oklch(0.65 0.24 24.14);
+  --color-green: oklch(0.78 0.17 162.95);
+  --color-blue: oklch(0.77 0.14 226.24);
 }
 
 @media screen and (prefers-color-scheme: light) {
-	:root {
-		--color-surface: oklch(1 0 0);
-		--color-panel: oklch(0.97 0 0);
-		--color-separator: oklch(0 0 0 / 0.09);
-		--color-hover: oklch(0.56 0 0 / 0.12);
-		--color-text: oklch(0.3 0 0);
-		--color-title: oklch(0.04 0 0);
-	}
+  :root {
+    --color-surface: oklch(1 0 0);
+    --color-panel: oklch(0.97 0 0);
+    --color-separator: oklch(0 0 0 / 0.09);
+    --color-hover: oklch(0.56 0 0 / 0.12);
+    --color-text: oklch(0.3 0 0);
+    --color-title: oklch(0.04 0 0);
+  }
 }

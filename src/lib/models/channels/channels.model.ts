@@ -15,78 +15,78 @@ export const $serverChannels = createStore<Array<ServerChannel>>([]);
 
 // FIXME: refactor, load only neccessary users from channels
 export const $channels: Store<Channel[]> = combine(
-	[usersModel.$users, $serverChannels, authModel.$user],
-	([users, channels, user]) => {
-		console.log("CHANNLES", channels);
+  [usersModel.$users, $serverChannels, authModel.$user],
+  ([users, channels, user]) => {
+    console.log("CHANNLES", channels);
 
-		return channels.map((channel) => {
-			const type = {
-				D: ChannelType.directMessage,
-				P: ChannelType.privateChannel,
-				O: ChannelType.publicChannel,
-				G: ChannelType.group,
-				threads: ChannelType.threads
-			}[channel.type];
+    return channels.map((channel) => {
+      const type = {
+        D: ChannelType.directMessage,
+        P: ChannelType.privateChannel,
+        O: ChannelType.publicChannel,
+        G: ChannelType.group,
+        threads: ChannelType.threads
+      }[channel.type];
 
-			if (type === ChannelType.directMessage) {
-				const relatedUserId = getUserIdFromChannelName(user?.id ?? "", channel.name);
-				const teammate = users.find((user) => user.id === relatedUserId)!;
+      if (type === ChannelType.directMessage) {
+        const relatedUserId = getUserIdFromChannelName(user?.id ?? "", channel.name);
+        const teammate = users.find((user) => user.id === relatedUserId)!;
 
-				return {
-					id: channel.id,
-					name: getFullName(teammate),
-					urlId: channel.name,
-					type: ChannelType.directMessage,
-					users: [teammate]
-				};
-			}
+        return {
+          id: channel.id,
+          name: getFullName(teammate),
+          urlId: channel.name,
+          type: ChannelType.directMessage,
+          users: [teammate]
+        };
+      }
 
-			if (type === ChannelType.group) {
-				const teammates = channel.display_name
-					.split(",")
-					.map((username) => username.trim())
-					.map((username) => users.find((user) => user.username === username)!);
+      if (type === ChannelType.group) {
+        const teammates = channel.display_name
+          .split(",")
+          .map((username) => username.trim())
+          .map((username) => users.find((user) => user.username === username)!);
 
-				return {
-					id: channel.id,
-					type: type,
-					urlId: channel.name,
-					name: channel.display_name,
-					users: teammates
-				};
-			}
+        return {
+          id: channel.id,
+          type: type,
+          urlId: channel.name,
+          name: channel.display_name,
+          users: teammates
+        };
+      }
 
-			return {
-				id: channel.id,
-				type: type,
-				urlId: channel.name,
-				name: channel.display_name,
-				users: []
-			};
-		});
-	}
+      return {
+        id: channel.id,
+        type: type,
+        urlId: channel.name,
+        name: channel.display_name,
+        users: []
+      };
+    });
+  }
 );
 
 sample({
-	clock: teamModel.$currentTeam,
-	source: authModel.$user,
-	fn: (user, team) => ({ userId: String(user?.id), teamId: String(team?.id) }),
-	target: loadChannelCategoriesFx
+  clock: teamModel.$currentTeam,
+  source: authModel.$user,
+  fn: (user, team) => ({ userId: String(user?.id), teamId: String(team?.id) }),
+  target: loadChannelCategoriesFx
 });
 
 sample({
-	clock: teamModel.$currentTeam,
-	filter: Boolean,
-	fn: (team) => team.id,
-	target: loadChannelsFx
+  clock: teamModel.$currentTeam,
+  filter: Boolean,
+  fn: (team) => team.id,
+  target: loadChannelsFx
 });
 
 sample({
-	clock: loadChannelsFx.doneData,
-	target: $serverChannels
+  clock: loadChannelsFx.doneData,
+  target: $serverChannels
 });
 
 sample({
-	clock: loadChannelCategoriesFx.doneData,
-	target: $categories
+  clock: loadChannelCategoriesFx.doneData,
+  target: $categories
 });
