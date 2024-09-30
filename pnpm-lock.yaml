@@ -17,6 +17,9 @@ dependencies:
   '@tauri-apps/plugin-shell':
     specifier: '>=2.0.0-rc.0'
     version: 2.0.0-rc.1
+  date-fns:
+    specifier: ^4.1.0
+    version: 4.1.0
   effector:
     specifier: ^23.2.2
     version: 23.2.2
@@ -49,6 +52,9 @@ devDependencies:
   eslint-config-prettier:
     specifier: ^9.1.0
     version: 9.1.0(eslint@9.11.1)
+  eslint-plugin-simple-import-sort:
+    specifier: ^12.1.1
+    version: 12.1.1(eslint@9.11.1)
   eslint-plugin-svelte:
     specifier: ^2.44.1
     version: 2.44.1(eslint@9.11.1)(svelte@4.2.19)
@@ -1624,6 +1630,10 @@ packages:
     hasBin: true
     dev: true
 
+  /date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
+    dev: false
+
   /debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
     engines: {node: '>=6.0'}
@@ -1728,6 +1738,14 @@ packages:
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
+    dependencies:
+      eslint: 9.11.1
+    dev: true
+
+  /eslint-plugin-simple-import-sort@12.1.1(eslint@9.11.1):
+    resolution: {integrity: sha512-6nuzu4xwQtE3332Uz0to+TxDQYRLTKRESSc2hefVT48Zc8JthmN23Gx9lnYhu0FtkRSL1oxny3kJ2aveVhmOVA==}
+    peerDependencies:
+      eslint: '>=5.0.0'
     dependencies:
       eslint: 9.11.1
     dev: true
