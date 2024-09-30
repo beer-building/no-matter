@@ -20,7 +20,8 @@
     "@tauri-apps/plugin-shell": ">=2.0.0-rc.0",
     "date-fns": "^4.1.0",
     "effector": "^23.2.2",
-    "patronum": "^2.2.0"
+    "patronum": "^2.2.0",
+    "svelte-portal": "^2.2.1"
   },
   "devDependencies": {
     "@mattermost/types": "^10.0.0",
