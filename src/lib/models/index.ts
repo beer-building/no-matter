@@ -1,4 +1,4 @@
-export * from "./users";
+export * from "./auth";
 export * from "./channels";
 export * from "./team";
-export * from "./auth";
+export * from "./users";

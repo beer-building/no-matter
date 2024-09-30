@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Icon } from '../icon';
+import { Icon } from "../icon";
 
-	export let icon = '';
+export let icon = "";
 </script>
 
 <li>
@@ -14,26 +14,26 @@
 </li>
 
 <style>
-	button {
-		width: 100%;
-		height: 25px;
-		display: flex;
-		align-items: center;
-		gap: var(--padding-s);
-		border-radius: calc(var(--radius) - var(--padding-s));
-		appearance: none;
-		border: none;
-		background: transparent;
-		font: var(--base-font);
-		--color: var(--color-text);
-		color: var(--color);
+button {
+	width: 100%;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	gap: var(--padding-s);
+	border-radius: calc(var(--radius) - var(--padding-s));
+	appearance: none;
+	border: none;
+	background: transparent;
+	font: var(--base-font);
+	--color: var(--color-text);
+	color: var(--color);
 
-		& :global(svg path) {
-			fill: var(--color);
-		}
-
-		&:hover {
-			background: var(--color-hover);
-		}
+	& :global(svg path) {
+		fill: var(--color);
 	}
+
+	&:hover {
+		background: var(--color-hover);
+	}
+}
 </style>

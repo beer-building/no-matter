@@ -1,4 +1,4 @@
-import { eachMonthOfInterval } from 'date-fns';
+import { eachMonthOfInterval } from "date-fns";
 
 export const generateMonthsByYear = (year: number): Array<Date> =>
 	eachMonthOfInterval({

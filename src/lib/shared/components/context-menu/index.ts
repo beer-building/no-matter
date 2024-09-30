@@ -1,5 +1,5 @@
-import ContextMenuComponent from './ContextMenu.svelte';
-import Item from './Item.svelte';
+import ContextMenuComponent from "./ContextMenu.svelte";
+import Item from "./Item.svelte";
 
 type _ContextMenu = typeof ContextMenuComponent & {
 	Item: typeof Item;

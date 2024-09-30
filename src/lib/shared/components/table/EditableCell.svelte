@@ -1,29 +1,30 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import Cell from './Cell.svelte';
-	import InputCell from './InputCell.svelte';
+import { createEventDispatcher } from "svelte";
 
-	export let pale = false;
-	export let colspan: number | undefined = undefined;
-	export let align: 'left' | 'right' = 'left';
-	export let value = '';
-	export let presentValue: string | undefined = undefined;
-	export let width: string = 'auto';
-	export let selectAll = false;
+import Cell from "./Cell.svelte";
+import InputCell from "./InputCell.svelte";
 
-	export let isEditing = false;
-	let inputValue = value;
+export let pale = false;
+export let colspan: number | undefined = undefined;
+export let align: "left" | "right" = "left";
+export let value = "";
+export let presentValue: string | undefined = undefined;
+export let width: string = "auto";
+export let selectAll = false;
 
-	const dispatch = createEventDispatcher();
+export let isEditing = false;
+let inputValue = value;
 
-	$: {
-		inputValue = value;
-	}
+const dispatch = createEventDispatcher();
 
-	const onDone = () => {
-		isEditing = false;
-		dispatch('change', inputValue);
-	};
+$: {
+	inputValue = value;
+}
+
+const onDone = () => {
+	isEditing = false;
+	dispatch("change", inputValue);
+};
 </script>
 
 {#if !isEditing}
@@ -40,18 +41,18 @@
 		on:blur={onDone}
 		on:keydown={({ key, shiftKey }) => {
 			switch (key) {
-				case 'Enter':
+				case "Enter":
 					onDone();
 					break;
-				case 'Escape':
+				case "Escape":
 					isEditing = false;
 					break;
-				case 'Tab':
+				case "Tab":
 					setTimeout(() => {
 						if (shiftKey) {
-							dispatch('focusprev');
+							dispatch("focusprev");
 						} else {
-							dispatch('focusnext');
+							dispatch("focusnext");
 						}
 					});
 					break;

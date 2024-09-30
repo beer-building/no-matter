@@ -1,3 +1,3 @@
-import MonthPicker from './MonthPicker.svelte';
+import MonthPicker from "./MonthPicker.svelte";
 
 export { MonthPicker };

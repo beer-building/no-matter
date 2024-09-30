@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
+import { slide } from "svelte/transition";
 
-	export let interactive = false;
-	export let animated = false;
+export let interactive = false;
+export let animated = false;
 </script>
 
 <tr
@@ -18,17 +18,17 @@
 </tr>
 
 <style lang="postcss">
-	tr {
-		display: flex;
-	}
-	.interactive {
-		cursor: pointer;
+tr {
+	display: flex;
+}
+.interactive {
+	cursor: pointer;
 
-		&:hover {
-			background: var(--color-hover);
-		}
+	&:hover {
+		background: var(--color-hover);
 	}
-	:global(tbody) tr + tr {
-		border-top: 1px solid var(--color-separator);
-	}
+}
+:global(tbody) tr + tr {
+	border-top: 1px solid var(--color-separator);
+}
 </style>
