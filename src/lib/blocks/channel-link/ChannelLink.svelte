@@ -1,17 +1,18 @@
 <script lang="ts">
-  import { ChannelType, type Channel } from "@/lib/models/channels/types";
-  import Direct from "./Direct.svelte";
-  import Group from "./Group.svelte";
-  import ChannelComponent from "./Channel.svelte";
-  import { page } from "$app/stores";
+import { type Channel, ChannelType } from "@/lib/models/channels/types";
+import { page } from "$app/stores";
 
-  export let channel: Channel;
+import ChannelComponent from "./Channel.svelte";
+import Direct from "./Direct.svelte";
+import Group from "./Group.svelte";
 
-  const channels = [ChannelType.publicChannel, ChannelType.privateChannel];
+export let channel: Channel;
 
-  $: href = channels.includes(channel.type)
-    ? `/app/channels/${channel.urlId}`
-    : `/app/messages/${channel.urlId}`;
+const channels = [ChannelType.publicChannel, ChannelType.privateChannel];
+
+$: href = channels.includes(channel.type)
+  ? `/app/channels/${channel.urlId}`
+  : `/app/messages/${channel.urlId}`;
 </script>
 
 <a {href} class:active={href === $page.url.pathname}>
@@ -25,19 +26,19 @@
 </a>
 
 <style lang="postcss">
-  a {
-    appearance: none;
-    text-decoration: none;
-    color: var(--color-text);
-    padding: var(--padding-s);
-    height: 30px;
-    display: flex;
-    align-items: center;
-    border-radius: var(--radius);
+a {
+  appearance: none;
+  text-decoration: none;
+  color: var(--color-text);
+  padding: var(--padding-s);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius);
 
-    &:hover,
-    &.active {
-      background: var(--color-hover);
-    }
+  &:hover,
+  &.active {
+    background: var(--color-hover);
   }
+}
 </style>

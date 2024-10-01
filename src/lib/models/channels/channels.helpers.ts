@@ -1,7 +1,4 @@
-export const getUserIdFromChannelName = (
-  userId: string,
-  channelName: string,
-): string => {
+export const getUserIdFromChannelName = (userId: string, channelName: string): string => {
   const ids = channelName.split("__");
   let otherUserId = "";
   if (ids[0] === userId) {

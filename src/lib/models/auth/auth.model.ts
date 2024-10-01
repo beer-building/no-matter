@@ -1,14 +1,11 @@
-import { createPersistedStore } from "@/lib/shared/helpers/store";
-import { createEffect, createEvent, createStore, sample } from "effector";
-import { providerModel } from "../provider";
-import {
-  checkAuthAndRedirectFx,
-  getCurrentUserDataFx,
-  loginFx,
-  logoutFx,
-} from "./auth.api";
 import type { UserProfile } from "@mattermost/types/users";
+import { createEffect, createEvent, createStore, sample } from "effector";
 import { pending, reset } from "patronum";
+
+import { createPersistedStore } from "@/lib/shared/helpers/store";
+
+import { providerModel } from "../provider";
+import { checkAuthAndRedirectFx, getCurrentUserDataFx, loginFx, logoutFx } from "./auth.api";
 import { $serverUrl, beforeSubmitValidated } from "./login-form.model";
 
 export const $token = createPersistedStore("token", "");
@@ -34,92 +31,92 @@ export const onAuth = createEvent();
 
 sample({
   clock: $serverUrl,
-  target: updateClientUrlFx,
+  target: updateClientUrlFx
 });
 
 sample({
   clock: setServerUrl,
-  target: $serverUrl,
+  target: $serverUrl
 });
 
 sample({
   clock: beforeSubmitValidated,
-  target: loginFx,
+  target: loginFx
 });
 
 sample({
   clock: loginFx.doneData,
   fn: ({ user }) => user,
-  target: $user,
+  target: $user
 });
 
 sample({
   clock: loginFx.doneData,
   fn: ({ token }) => token,
-  target: $token,
+  target: $token
 });
 
 sample({
   clock: logout,
-  target: logoutFx,
+  target: logoutFx
 });
 
 sample({
   clock: [getCurrentUserDataFx.done, loginFx.done],
   fn: () => true,
-  target: $isAuthorized,
+  target: $isAuthorized
 });
 
 sample({
   clock: [getCurrentUserDataFx.fail, loginFx.fail],
   fn: () => false,
-  target: $isAuthorized,
+  target: $isAuthorized
 });
 
 sample({
   clock: getCurrentUserDataFx.doneData,
-  target: $user,
+  target: $user
 });
 
 sample({
   clock: _getUserData,
-  target: getCurrentUserDataFx,
+  target: getCurrentUserDataFx
 });
 
 sample({
   clock: _onInit,
   source: $serverUrl,
-  target: updateClientUrlFx,
+  target: updateClientUrlFx
 });
 
 sample({
   clock: _onInit,
   source: $token,
-  target: setTokenFx,
+  target: setTokenFx
 });
 
 sample({
   clock: _onInit,
-  target: _getUserData,
+  target: _getUserData
 });
 
 sample({
   clock: [$pending, $isAuthorized],
   source: {
     pending: $pending,
-    isAuthorized: $isAuthorized,
+    isAuthorized: $isAuthorized
   },
-  target: checkAuthAndRedirectFx,
+  target: checkAuthAndRedirectFx
 });
 
 sample({
   clock: [$pending, $isAuthorized],
   source: {
     pending: $pending,
-    isAuthorized: $isAuthorized,
+    isAuthorized: $isAuthorized
   },
   filter: ({ pending, isAuthorized }) => !pending && isAuthorized,
-  target: onAuth,
+  target: onAuth
 });
 
 setTimeout(() => {
@@ -128,5 +125,5 @@ setTimeout(() => {
 
 reset({
   clock: logoutFx,
-  target: [$isAuthorized, $user],
+  target: [$isAuthorized, $user]
 });

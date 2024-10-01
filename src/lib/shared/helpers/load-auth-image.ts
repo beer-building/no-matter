@@ -2,10 +2,7 @@ import { providerModel } from "@/lib/models/provider";
 
 const _urls = new Map<string, string>();
 
-export const loadAuthImage = async (
-  src: string,
-  callback: (newUrl: string) => void,
-) => {
+export const loadAuthImage = async (src: string, callback: (newUrl: string) => void) => {
   if (_urls.has(src)) {
     callback(_urls.get(src)!);
 
@@ -17,8 +14,8 @@ export const loadAuthImage = async (
 
   const res = await fetch(src, {
     headers: {
-      Authorization: `Bearer ${providerModel.client.token}`,
-    },
+      Authorization: `Bearer ${providerModel.client.token}`
+    }
   });
   const blob = await res.blob();
   const url = URL.createObjectURL(blob);

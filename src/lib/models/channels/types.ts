@@ -5,7 +5,7 @@ export enum ChannelType {
   privateChannel = "privateChannel",
   publicChannel = "publicChannel",
   group = "group",
-  threads = "threads",
+  threads = "threads"
 }
 
 export type Channel = {

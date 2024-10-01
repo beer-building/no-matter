@@ -1,5 +1,5 @@
 <script lang>
-  import { goto } from "$app/navigation";
+import { goto } from "$app/navigation";
 
-  goto("/app/settings", { replaceState: true });
+goto("/app/settings", { replaceState: true });
 </script>

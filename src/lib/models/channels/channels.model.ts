@@ -1,13 +1,14 @@
-import { combine, createStore, sample, type Store } from "effector";
-import { teamModel } from "../team";
-import { authModel } from "../auth";
 import type { ChannelCategory } from "@mattermost/types/channel_categories";
 import type { ServerChannel } from "@mattermost/types/channels";
+import { combine, createStore, sample, type Store } from "effector";
+
+import { authModel } from "../auth";
+import { teamModel } from "../team";
 import { usersModel } from "../users";
-import { ChannelType, type Channel } from "./types";
-import { getUserIdFromChannelName } from "./channels.helpers";
 import { getFullName } from "../users/users.helpers";
 import { loadChannelCategoriesFx, loadChannelsFx } from "./channels.api";
+import { getUserIdFromChannelName } from "./channels.helpers";
+import { type Channel, ChannelType } from "./types";
 
 export const $categories = createStore<Array<ChannelCategory>>([]);
 export const $serverChannels = createStore<Array<ServerChannel>>([]);
@@ -24,14 +25,11 @@ export const $channels: Store<Channel[]> = combine(
         P: ChannelType.privateChannel,
         O: ChannelType.publicChannel,
         G: ChannelType.group,
-        threads: ChannelType.threads,
+        threads: ChannelType.threads
       }[channel.type];
 
       if (type === ChannelType.directMessage) {
-        const relatedUserId = getUserIdFromChannelName(
-          user?.id ?? "",
-          channel.name,
-        );
+        const relatedUserId = getUserIdFromChannelName(user?.id ?? "", channel.name);
         const teammate = users.find((user) => user.id === relatedUserId)!;
 
         return {
@@ -39,7 +37,7 @@ export const $channels: Store<Channel[]> = combine(
           name: getFullName(teammate),
           urlId: channel.name,
           type: ChannelType.directMessage,
-          users: [teammate],
+          users: [teammate]
         };
       }
 
@@ -54,7 +52,7 @@ export const $channels: Store<Channel[]> = combine(
           type: type,
           urlId: channel.name,
           name: channel.display_name,
-          users: teammates,
+          users: teammates
         };
       }
 
@@ -63,32 +61,32 @@ export const $channels: Store<Channel[]> = combine(
         type: type,
         urlId: channel.name,
         name: channel.display_name,
-        users: [],
+        users: []
       };
     });
-  },
+  }
 );
 
 sample({
   clock: teamModel.$currentTeam,
   source: authModel.$user,
   fn: (user, team) => ({ userId: String(user?.id), teamId: String(team?.id) }),
-  target: loadChannelCategoriesFx,
+  target: loadChannelCategoriesFx
 });
 
 sample({
   clock: teamModel.$currentTeam,
   filter: Boolean,
   fn: (team) => team.id,
-  target: loadChannelsFx,
+  target: loadChannelsFx
 });
 
 sample({
   clock: loadChannelsFx.doneData,
-  target: $serverChannels,
+  target: $serverChannels
 });
 
 sample({
   clock: loadChannelCategoriesFx.doneData,
-  target: $categories,
+  target: $categories
 });

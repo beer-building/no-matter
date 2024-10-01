@@ -1,6 +1,7 @@
-import { defineConfig } from "vite";
-import { sveltekit } from "@sveltejs/kit/vite";
 import path from "node:path";
+
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 
 const host = process.env.TAURI_DEV_HOST;
 
@@ -14,8 +15,8 @@ export default defineConfig(async () => ({
   clearScreen: false,
   resolve: {
     alias: {
-      "@": path.resolve("./src/"),
-    },
+      "@": path.resolve("./src/")
+    }
   },
   // 2. tauri expects a fixed port, fail if that port is not available
   server: {
@@ -26,12 +27,12 @@ export default defineConfig(async () => ({
       ? {
           protocol: "ws",
           host,
-          port: 1421,
+          port: 1421
         }
       : undefined,
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
-      ignored: ["**/src-tauri/**"],
-    },
-  },
+      ignored: ["**/src-tauri/**"]
+    }
+  }
 }));

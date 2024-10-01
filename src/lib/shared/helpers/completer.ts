@@ -1,12 +1,12 @@
 export class Completer<T> {
-	promise: Promise<T>;
-	resolve!: (value: T | PromiseLike<T>) => void;
-	reject!: (value: unknown) => void;
+  promise: Promise<T>;
+  resolve!: (value: T | PromiseLike<T>) => void;
+  reject!: (value: unknown) => void;
 
-	constructor() {
-		this.promise = new Promise<T>((resolve, reject) => {
-			this.resolve = resolve;
-			this.reject = reject;
-		});
-	}
+  constructor() {
+    this.promise = new Promise<T>((resolve, reject) => {
+      this.resolve = resolve;
+      this.reject = reject;
+    });
+  }
 }

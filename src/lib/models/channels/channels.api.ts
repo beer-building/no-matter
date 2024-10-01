@@ -1,4 +1,5 @@
 import { createEffect } from "effector";
+
 import { providerModel } from "../provider";
 
 export const loadChannelCategoriesFx = createEffect(
@@ -6,9 +7,9 @@ export const loadChannelCategoriesFx = createEffect(
     const res = await providerModel.client.getChannelCategories(userId, teamId);
 
     return res.categories;
-  },
+  }
 );
 
 export const loadChannelsFx = createEffect(async (teamId: string) =>
-  providerModel.client.getMyChannels(teamId),
+  providerModel.client.getMyChannels(teamId)
 );

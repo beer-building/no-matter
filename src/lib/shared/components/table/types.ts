@@ -1,6 +1,1 @@
-enum Order {
-	desc,
-	asc
-}
-
-export type TableContext = {};
+export type TableContext = object;
